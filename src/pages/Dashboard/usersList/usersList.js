@@ -1,11 +1,11 @@
 import React from 'react';
 
-const usersList = () => {
+const UsersList = () => {
     return (
         <div>
-            <h1>All users list</h1>
+            <h1>All users List</h1>
         </div>
     );
 };
 
-export default usersList;
+export default UsersList;
