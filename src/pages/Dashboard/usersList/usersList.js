@@ -34,8 +34,8 @@ const UsersList = () => {
                         </thead>
                         <tbody className='text-sm font-semibold'>
                             {
-                                users?.map((user, i) => <tr key={user.id} className="hover">
-                                    <th>{i + 1}</th>
+                                users?.map((user) => <tr key={user.id} className="hover">
+                                    <th>{user.id}</th>
                                     <td>
                                         <div className='flex items-center gap-5'>
                                             <div className="avatar">
