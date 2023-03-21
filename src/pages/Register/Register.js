@@ -14,7 +14,7 @@ const Register = () => {
 
     useEffect(()=>{
         if(!isLoading && !error && email){
-            navigate('/users-list')
+            navigate('/dashboard')
         }
     },[isLoading, error, email, navigate]);
 

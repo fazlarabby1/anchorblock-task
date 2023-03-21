@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { IoNotificationsOutline } from "react-icons/io5";
 import profile from '../../assets/Profile.jpg';
 import stack from '../../assets/paper 1.png';
@@ -23,6 +23,7 @@ const Navbar = () => {
     const menuItems = <>
         {email ? <>
         <li><p><IoNotificationsOutline className='text-lg' /></p></li>
+        <li><NavLink className={({ isActive }) => isActive ? 'btn btn-ghost text-orange-300 rounded' : 'btn btn-ghost'} to='/dashboard'>Dashboard</NavLink></li>
         <li>
             <div className="avatar">
                 <div className="w-12 rounded-full">

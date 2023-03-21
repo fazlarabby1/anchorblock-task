@@ -15,7 +15,7 @@ const Login = () => {
 
     useEffect(()=>{
         if(!isLoading && email){
-            navigate('/users-list')
+            navigate('/dashboard')
         }
     },[isLoading, email, navigate]);
 
