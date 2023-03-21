@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsApple } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { createUser, googleLogin } from '../../features/auth/authSlice';
 
 const Register = () => {
 
+    const navigate = useNavigate();
     const [agree, setAgree] = useState(false);
-    const {error} = useSelector(state => state.auth);
+    const {isError,error, isLoading, email} = useSelector(state => state.auth);
+
+    useEffect(()=>{
+        if(!isLoading && !error && email){
+            navigate('/users-list')
+        }
+    },[isLoading, error, email, navigate]);
 
     const dispatch = useDispatch();
 
@@ -19,10 +26,9 @@ const Register = () => {
         dispatch(createUser({ email: data.email, password: data.password }));
     };
 
-    const handleGoogleLogIn = () => {
-        dispatch(googleLogin);
+    const handleGoogleSingUp = () => {
+        dispatch(googleLogin());
     };
-
 
     return (
         <div className='h-[700px] flex justify-center items-center'>
@@ -31,7 +37,7 @@ const Register = () => {
                 <h2 className='text-[26px] font-bold text-center'>Getting Started</h2>
                 <p className='text-center font-medium text-lg text-slate-400'>Create an account to continue!</p>
                 <div className='flex justify-between'>
-                    <button onClick={handleGoogleLogIn} className='btn border-blue-100 mt-4 w-64 text-slate-400 bg-blue-50 hover:text-white'><FcGoogle className='w-6 h-6 mr-3' /> <span className='text-xs'>Sign In With Google</span></button>
+                    <button onClick={handleGoogleSingUp} className='btn border-blue-100 mt-4 w-64 text-slate-400 bg-blue-50 hover:text-white'><FcGoogle className='w-6 h-6 mr-3' /> <span className='text-xs'>Sign In With Google</span></button>
                     <button className='btn border-blue-100 w-64 mt-4 text-slate-400 bg-blue-50 hover:text-white'><BsApple className='w-6 h-6 mr-3' /> <span className='text-xs'>Sign In With Apple ID</span></button>
                 </div>
                 <div className="divider font-medium text-slate-400 text-xl">OR</div>
@@ -83,7 +89,7 @@ const Register = () => {
                             <span className="label-text text-slate-400">I agree to the Terms & Conditions</span>
                         </label>
                     </div>
-                    {error && <p className='text-red-600'>{error}</p>}
+                    {isError && <p className='text-red-600'>{error}</p>}
                     <input className='btn bg-blue-500 border-none w-full mt-3' disabled={agree === false} type="submit" value='Sign Up' />
                 </form>
 

@@ -7,12 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { googleLogin, loginUser } from '../../features/auth/authSlice';
 
 const Login = () => {
+    const { register, formState: { errors }, handleSubmit } = useForm();
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const {isLoading, email} = useSelector(state => state.auth);
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const {isError,error, isLoading, email} = useSelector(state => state.auth);
 
     useEffect(()=>{
         if(!isLoading && email){
@@ -28,7 +27,7 @@ const Login = () => {
     };
 
     const handleGoogleLogIn = () => {
-        dispatch(googleLogin);
+        dispatch(googleLogin());
     };
 
     return (
@@ -70,7 +69,6 @@ const Login = () => {
                         />
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
                     </div>
-                    {/* {loginError && <p className='text-red-600'>{loginError?.message}</p>} */}
                     <div
                         className="my-4 w-36">
                         <label className="flex items-center gap-4">
@@ -78,6 +76,7 @@ const Login = () => {
                             <span className="label-text text-slate-400">Remember me</span>
                         </label>
                     </div>
+                    {isError && <p className='text-red-600'>{error}</p>}
                     <input className='btn bg-blue-500 border-none w-full mt-3' disabled={check === false} type="submit" value='Sign In' />
                 </form>
 
