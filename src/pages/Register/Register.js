@@ -47,7 +47,7 @@ const Register = () => {
                         <label className="label">
                             <span className="label-text"></span>
                         </label>
-                        <input className="input input-bordered w-full"
+                        <input className={errors.email ? "input input-bordered w-full border-red-600" : "input input-bordered w-full"}
                             placeholder='@ Your Email'
                             type='email'
                             {...register('email', { required: "Email is required" })}
@@ -59,7 +59,7 @@ const Register = () => {
                         < label className="label" >
                             <span className="label-text"></span>
                         </label >
-                        <input className="input input-bordered w-full"
+                        <input className={errors.name ? "input input-bordered w-full border-red-600" : "input input-bordered w-full"}
                             placeholder='Your Name' type='text'
                             {
                             ...register('name', { required: " Your name is required" })
@@ -72,7 +72,7 @@ const Register = () => {
                         <label className="label">
                             <span className="label-text"></span>
                         </label>
-                        <input className="input input-bordered w-full"
+                        <input className={errors.password ? "input input-bordered w-full border-red-600" : "input input-bordered w-full"}
                             placeholder='Create Password'
                             type='password'
                             {...register('password', {

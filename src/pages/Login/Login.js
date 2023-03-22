@@ -11,19 +11,19 @@ const Login = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {isError,error, isLoading, email} = useSelector(state => state.auth);
+    const { isError, error, isLoading, email } = useSelector(state => state.auth);
 
-    useEffect(()=>{
-        if(!isLoading && email){
+    useEffect(() => {
+        if (!isLoading && email) {
             navigate('/dashboard')
         }
-    },[isLoading, email, navigate]);
+    }, [isLoading, email, navigate]);
 
     const [check, setCheck] = useState(false);
 
 
     const handleLogIn = (data) => {
-        dispatch(loginUser({email: data.email, password: data.password}));
+        dispatch(loginUser({ email: data.email, password: data.password }));
     };
 
     const handleGoogleLogIn = () => {
@@ -47,7 +47,7 @@ const Login = () => {
                         <label className="label">
                             <span className="label-text"></span>
                         </label>
-                        <input className="input input-bordered w-full"
+                        <input className={errors.email ? "input input-bordered w-full border-red-600" : "input input-bordered w-full"}
                             placeholder='@ Your Email'
                             type='email'
                             {...register('email', { required: "Email is required" })}
@@ -59,7 +59,7 @@ const Login = () => {
                         <label className="label">
                             <span className="label-text"></span>
                         </label>
-                        <input className="input input-bordered w-full"
+                        <input className={errors.password ? "input input-bordered w-full border-red-600" : "input input-bordered w-full"}
                             placeholder='Password'
                             type='password'
                             {...register('password', {
@@ -72,7 +72,7 @@ const Login = () => {
                     <div
                         className="my-4 w-36">
                         <label className="flex items-center gap-4">
-                            <input onClick={()=>setCheck(!check)} type="checkbox" className="checkbox" />
+                            <input onClick={() => setCheck(!check)} type="checkbox" className="checkbox" />
                             <span className="label-text text-slate-400">Remember me</span>
                         </label>
                     </div>
